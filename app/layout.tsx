@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Job Genie",
   description: "Career Guidance for CS Students",
+  icons: {
+    icon: "/magic-lamp (1).svg",
+  },
 };
 
 export default function RootLayout({
