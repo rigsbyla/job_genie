@@ -108,9 +108,9 @@ const Quiz = ({ onCancel }: Props) => {
   /* Spinner and loading text */
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-        <p className="text-gray-600 text-sm">
+      <div className="flex flex-col items-center justify-center min-h-[400px] w-full max-w-xl mx-auto space-y-4">
+        <div className="w-12 h-12 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin" />
+        <p className="text-gray-500 font-medium animate-pulse">
           Finding your best career path...
         </p>
       </div>
