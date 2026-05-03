@@ -85,3 +85,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 next-env.d.ts
+
+main.cpython-314.pyc

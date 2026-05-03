@@ -27,7 +27,17 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <header className="border-b px-6 py-4 flex items-center justify-between">
+          <span className="font-semibold text-lg">Job Genie</span>
+          <nav className="flex gap-4 text-sm">
+            <a href="/">Retake the Quiz</a>
+            <a href="/job_board">All Jobs</a>
+  
+          </nav>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
