@@ -7,12 +7,11 @@ import os
 
 load_dotenv()
 
+# Initialize Supabase client
 supabase: Client = create_client(
     os.environ["SUPABASE_URL"],
     os.environ["SUPABASE_KEY"]
 )
-
-print("Connecting to:", os.environ["SUPABASE_URL"])
 
 app = FastAPI()
 
@@ -24,11 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-supabase: Client = create_client(
-    os.environ["SUPABASE_URL"],
-    os.environ["SUPABASE_KEY"]
-)
-
+# Endpoint to fetch jobs with optional filters for discipline, level, and type
 @app.get("/jobs")
 async def get_jobs(
     discipline: str = Query(None),
@@ -54,7 +49,7 @@ async def get_jobs(
 
     return formatted
 
-
+# Endpoint to fetch a single job by ID, including its skills
 @app.get("/jobs/{job_id}")
 async def get_job(job_id: int):
     result = supabase.table("jobs") \
@@ -71,6 +66,9 @@ async def get_job(job_id: int):
 
     return job
 
+
+# Not currently used, but will allow to fetch trends for graph creation in the future
+# Endpoint to fetch trends for skills, remote work, and disciplines over time
 @app.get("/trends/skills")
 async def skill_trends():
     result = supabase.table("job_snapshots") \
@@ -86,7 +84,7 @@ async def skill_trends():
 
     return {skill: dict(sorted(months.items())) for skill, months in counts.items()}
 
-
+# Endpoint for remote work
 @app.get("/trends/remote")
 async def remote_trends():
     result = supabase.table("job_snapshots") \
@@ -101,7 +99,7 @@ async def remote_trends():
 
     return {remote: dict(sorted(months.items())) for remote, months in counts.items()}
 
-
+# Endpoint for disciplines
 @app.get("/trends/discipline")
 async def discipline_trends():
     result = supabase.table("job_snapshots") \

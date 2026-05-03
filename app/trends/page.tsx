@@ -1,5 +1,5 @@
 'use client'
-
+// This page is not in use currently, but will be used in the future to display trends graphs for skills, remote work, and disciplines over time. It fetches data from the backend and formats it for use with the Recharts library.
 import { Suspense } from 'react'
 import { useEffect, useState } from 'react'
 import { Line, LineChart } from 'recharts'

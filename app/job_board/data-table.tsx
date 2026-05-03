@@ -43,16 +43,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/input-menu"
 
+// filter options
 const DISCIPLINES = ['frontend', 'backend', 'data', 'algorithms', 'devops']
 const TYPES = ['Full-time', 'Part-time', 'Contract', 'Internship']
 const LEVELS = ['Entry', 'Mid', 'Senior', 'Lead', 'Manager']
 const REMOTE_OPTIONS = ['Remote', 'On-site', 'Hybrid']
 
+// main component
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
+// DataTable component that takes in columns and data as props and renders a table with sorting, filtering, and pagination
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -60,6 +63,7 @@ export function DataTable<TData, TValue>({
   const searchParams = useSearchParams()
   const initialDiscipline = searchParams.get('discipline')
 
+  // state for sorting, filtering, and pagination
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     initialDiscipline ? [{ id: 'discipline', value: initialDiscipline }] : []
@@ -69,6 +73,7 @@ export function DataTable<TData, TValue>({
   const [selectedLevel, setSelectedLevel] = React.useState<string | null>(null)
   const [selectedRemote, setSelectedRemote] = React.useState<string | null>(null)
 
+  // create the table instance using useReactTable hook
   const table = useReactTable({
     data,
     columns,
@@ -81,6 +86,7 @@ export function DataTable<TData, TValue>({
     state: { sorting, columnFilters },
   })
 
+  // handlers for filter changes
   function handleDisciplineFilter(value: string | null) {
     setSelectedDiscipline(value)
     table.getColumn('discipline')?.setFilterValue(value ?? undefined)
@@ -112,6 +118,7 @@ export function DataTable<TData, TValue>({
   const filterButton = "border border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-50 text-sm px-4 py-2 rounded-full transition-colors"
   const activeFilterButton = "border border-violet-500/50 bg-violet-500/10 text-violet-300 hover:bg-violet-500/20 text-sm px-4 py-2 rounded-full transition-colors"
 
+  // component for rendering a dropdown filter
   function FilterDropdown({
     label,
     options,
