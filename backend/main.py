@@ -44,6 +44,7 @@ async def get_jobs(
     if type:
         query = query.eq("type", type)
 
+    query = query.order("created_at", desc=True)
     result = query.execute()
 
     formatted = [
