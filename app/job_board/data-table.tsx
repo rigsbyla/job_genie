@@ -91,6 +91,14 @@ export function DataTable<TData, TValue>({
     table.getColumn('remote')?.setFilterValue(value ?? undefined)
   }
 
+  function handleClearFilters() {
+    setSelectedDiscipline(null)
+    setSelectedType(null)
+    setSelectedLevel(null)
+    setSelectedRemote(null)
+    table.resetColumnFilters()
+  }
+
   const filterButton = "border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-slate-50 text-sm px-4 py-2 rounded-full transition-colors"
   const activeFilterButton = "border border-indigo-500/50 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 text-sm px-4 py-2 rounded-full transition-colors"
 
@@ -147,6 +155,14 @@ export function DataTable<TData, TValue>({
         <FilterDropdown label="Type" options={TYPES} selected={selectedType} onSelect={handleTypeFilter} />
         <FilterDropdown label="Level" options={LEVELS} selected={selectedLevel} onSelect={handleLevelFilter} />
         <FilterDropdown label="Remote" options={REMOTE_OPTIONS} selected={selectedRemote} onSelect={handleRemoteFilter} />
+        {(selectedDiscipline || selectedType || selectedLevel || selectedRemote) && (
+          <button
+            className="border border-slate-600 bg-transparent text-slate-500 hover:bg-slate-800 hover:text-slate-300 text-sm px-4 py-2 rounded-full transition-colors"
+            onClick={handleClearFilters}
+          >
+            Clear all ✕
+          </button>
+        )}
       </div>
 
       {/* table */}
