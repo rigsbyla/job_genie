@@ -18,7 +18,7 @@ const AnswerList = ({ options, onSelect }: Props) => {
         <button
           key={option.id}
           onClick={() => onSelect(option)}
-          className="w-full p-3 border rounded-xl hover:bg-gray-100 transition"
+          className="w-full p-4 border border-zinc-700 bg-zinc-900 rounded-xl text-zinc-300 text-left hover:bg-zinc-800 hover:border-zinc-600 hover:text-zinc-100 transition-colors active:scale-[0.99]"
         >
           {option.text}
         </button>
