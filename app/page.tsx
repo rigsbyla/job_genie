@@ -16,9 +16,7 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <div className="bg-violet-500 p-2 rounded-xl">
-            <Zap className="w-5 h-5 text-white" />
-          </div>
+          <img src="/magic-lamp.svg" className="w-9 h-9" alt="" />   
           <span className="text-xl font-bold tracking-tight">Job Genie</span>
         </div>
         <div className="flex gap-6 items-center text-sm font-medium text-zinc-300">
