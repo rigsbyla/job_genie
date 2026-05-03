@@ -57,8 +57,8 @@ export default function LandingPage() {
         </div>
 
         <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed">
-          Stop endlessly scrolling. Find internships and new grad roles in
-          vibrant, walkable cities that actually match your skills and vibe.
+          Stop endlessly scrolling. Find internships and new grad roles 
+          that actually match your skills and vibe.
           Take the quiz, let AI do the heavy lifting, and get hired.
         </p>
 
@@ -92,7 +92,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Feature 1: AI Quiz */}
-            <div className="bg-zinc-950 p-8 rounded-3xl border border-zinc-800 hover:border-violet-500/50 transition-colors group relative overflow-hidden">
+            <div className="bg-zinc-950 p-8 rounded-3xl border border-zinc-800  transition-colors group relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl group-hover:bg-violet-500/20 transition-all" />
               <div className="bg-violet-500/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border border-violet-500/20">
                 <Sparkles className="w-7 h-7 text-violet-400" />
@@ -106,7 +106,7 @@ export default function LandingPage() {
             </div>
 
             {/* Feature 2: Smart Job Board */}
-            <div className="bg-zinc-950 p-8 rounded-3xl border border-zinc-800 hover:border-violet-500/50 transition-colors group relative overflow-hidden">
+            <div className="bg-zinc-950 p-8 rounded-3xl border border-zinc-800  transition-colors group relative overflow-hidden">
               <div className="absolute top-0 left-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl group-hover:bg-violet-500/20 transition-all" />
               <div className="bg-violet-500/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border border-violet-500/20">
                 <Briefcase className="w-7 h-7 text-violet-400" />
