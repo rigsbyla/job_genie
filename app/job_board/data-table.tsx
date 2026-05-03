@@ -33,9 +33,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/input-menu"
 
-const DISCIPLINES = ['Frontend', 'Backend', 'Data', 'Algorithms', 'DevOps']
+const DISCIPLINES = ['frontend', 'backend', 'data', 'algorithms', 'devops']
 const TYPES = ['Full-time', 'Part-time', 'Contract', 'Internship']
-const LEVELS = ['Junior', 'Mid', 'Senior', 'Lead']
+const LEVELS = ['Entry', 'Mid', 'Senior', 'Lead', 'Manager']
 const REMOTE_OPTIONS = ['Remote', 'On-site', 'Hybrid']
 
 interface DataTableProps<TData, TValue> {
@@ -54,9 +54,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     initialDiscipline ? [{ id: 'discipline', value: initialDiscipline }] : []
   )
-  const [selectedDiscipline, setSelectedDiscipline] = React.useState<string | null>(
-    initialDiscipline
-  )
+  const [selectedDiscipline, setSelectedDiscipline] = React.useState<string | null>(initialDiscipline)
   const [selectedType, setSelectedType] = React.useState<string | null>(null)
   const [selectedLevel, setSelectedLevel] = React.useState<string | null>(null)
   const [selectedRemote, setSelectedRemote] = React.useState<string | null>(null)
@@ -70,169 +68,98 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      sorting,
-      columnFilters,
-    },
+    state: { sorting, columnFilters },
   })
 
   function handleDisciplineFilter(value: string | null) {
     setSelectedDiscipline(value)
-    if (value) {
-      table.getColumn('discipline')?.setFilterValue(value)
-    } else {
-      table.getColumn('discipline')?.setFilterValue(undefined)
-    }
+    table.getColumn('discipline')?.setFilterValue(value ?? undefined)
   }
 
   function handleTypeFilter(value: string | null) {
     setSelectedType(value)
-    if (value) {
-      table.getColumn('type')?.setFilterValue(value)
-    } else {
-      table.getColumn('type')?.setFilterValue(undefined)
-    }
+    table.getColumn('type')?.setFilterValue(value ?? undefined)
   }
 
   function handleLevelFilter(value: string | null) {
     setSelectedLevel(value)
-    if (value) {
-      table.getColumn('level')?.setFilterValue(value)
-    } else {
-      table.getColumn('level')?.setFilterValue(undefined)
-    }
+    table.getColumn('level')?.setFilterValue(value ?? undefined)
   }
 
   function handleRemoteFilter(value: string | null) {
     setSelectedRemote(value)
-    if (value) {
-      table.getColumn('remote')?.setFilterValue(value)
-    } else {
-      table.getColumn('remote')?.setFilterValue(undefined)
-    } 
+    table.getColumn('remote')?.setFilterValue(value ?? undefined)
+  }
+
+  const filterButton = "border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-slate-50 text-sm px-4 py-2 rounded-full transition-colors"
+  const activeFilterButton = "border border-indigo-500/50 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 text-sm px-4 py-2 rounded-full transition-colors"
+
+  function FilterDropdown({
+    label,
+    options,
+    selected,
+    onSelect,
+  }: {
+    label: string
+    options: string[]
+    selected: string | null
+    onSelect: (value: string | null) => void
+  }) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className={selected ? activeFilterButton : filterButton}>
+            {selected ? selected : label}
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="bg-slate-900 border-slate-700 text-slate-300">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel className="text-slate-500">{label}</DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-slate-700" />
+            {options.map(option => (
+              <DropdownMenuItem
+                key={option}
+                onClick={() => onSelect(option)}
+                className="hover:bg-slate-800 hover:text-slate-50 cursor-pointer"
+              >
+                {option}
+              </DropdownMenuItem>
+            ))}
+            <DropdownMenuSeparator className="bg-slate-700" />
+            <DropdownMenuItem
+              onClick={() => onSelect(null)}
+              className="hover:bg-slate-800 text-slate-500 hover:text-slate-300 cursor-pointer"
+            >
+              Clear filter
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
   }
 
   return (
-    <div>
-      <div className="flex items-center py-4 gap-2">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              {selectedDiscipline ? selectedDiscipline : 'Discipline'}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Discipline</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {DISCIPLINES.map(discipline => (
-                <DropdownMenuItem
-                  key={discipline}
-                  onClick={() => handleDisciplineFilter(discipline)}
-                >
-                  {discipline}
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleDisciplineFilter(null)}>
-                Clear filter
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <div className="p-6">
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              {selectedType ? selectedType : 'Type'}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Type</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {TYPES.map(type => (
-                <DropdownMenuItem
-                  key={type}
-                  onClick={() => handleTypeFilter(type)}
-                >
-                  {type}
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleTypeFilter(null)}>
-                Clear filter
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              {selectedLevel ? selectedLevel : 'Level'}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Level</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {LEVELS.map(level => (
-                <DropdownMenuItem
-                  key={level}
-                  onClick={() => handleLevelFilter(level)}
-                >
-                  {level}
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleLevelFilter(null)}>
-                Clear filter
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              {selectedRemote ? selectedRemote : 'Remote'}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Remote</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {REMOTE_OPTIONS.map(option => (
-                <DropdownMenuItem
-                  key={option}
-                  onClick={() => handleRemoteFilter(option)}
-                >
-                  {option}
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleRemoteFilter(null)}>
-                Clear filter
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      {/* filters */}
+      <div className="flex items-center gap-2 mb-6 flex-wrap">
+        <FilterDropdown label="Discipline" options={DISCIPLINES} selected={selectedDiscipline} onSelect={handleDisciplineFilter} />
+        <FilterDropdown label="Type" options={TYPES} selected={selectedType} onSelect={handleTypeFilter} />
+        <FilterDropdown label="Level" options={LEVELS} selected={selectedLevel} onSelect={handleLevelFilter} />
+        <FilterDropdown label="Remote" options={REMOTE_OPTIONS} selected={selectedRemote} onSelect={handleRemoteFilter} />
       </div>
 
-      <div className="overflow-hidden rounded-md border">
+      {/* table */}
+      <div className="rounded-2xl border border-slate-800 overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="border-slate-800 bg-slate-950 hover:bg-slate-950">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="text-slate-400 font-medium">
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
               </TableRow>
@@ -243,10 +170,11 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  className="border-slate-800 hover:bg-slate-800/50 transition-colors"
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="text-slate-300">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -254,7 +182,7 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell colSpan={columns.length} className="h-24 text-center text-slate-500">
                   No results.
                 </TableCell>
               </TableRow>
@@ -263,24 +191,24 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
+      {/* pagination */}
+      <div className="flex items-center justify-end gap-2 pt-4">
+        <button
+          className={filterButton}
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
+        </button>
+        <button
+          className={filterButton}
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           Next
-        </Button>
+        </button>
       </div>
+
     </div>
   )
 }
