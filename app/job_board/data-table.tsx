@@ -99,8 +99,8 @@ export function DataTable<TData, TValue>({
     table.resetColumnFilters()
   }
 
-  const filterButton = "border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-slate-50 text-sm px-4 py-2 rounded-full transition-colors"
-  const activeFilterButton = "border border-indigo-500/50 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 text-sm px-4 py-2 rounded-full transition-colors"
+  const filterButton = "border border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-50 text-sm px-4 py-2 rounded-full transition-colors"
+  const activeFilterButton = "border border-violet-500/50 bg-violet-500/10 text-violet-300 hover:bg-violet-500/20 text-sm px-4 py-2 rounded-full transition-colors"
 
   function FilterDropdown({
     label,
@@ -120,23 +120,23 @@ export function DataTable<TData, TValue>({
             {selected ? selected : label}
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-slate-900 border-slate-700 text-slate-300">
+        <DropdownMenuContent className="bg-zinc-900 border-zinc-700 text-zinc-300">
           <DropdownMenuGroup>
-            <DropdownMenuLabel className="text-slate-500">{label}</DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-slate-700" />
+            <DropdownMenuLabel className="text-zinc-500">{label}</DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-zinc-700" />
             {options.map(option => (
               <DropdownMenuItem
                 key={option}
                 onClick={() => onSelect(option)}
-                className="hover:bg-slate-800 hover:text-slate-50 cursor-pointer"
+                className="hover:bg-zinc-800 hover:text-zinc-50 cursor-pointer"
               >
                 {option}
               </DropdownMenuItem>
             ))}
-            <DropdownMenuSeparator className="bg-slate-700" />
+            <DropdownMenuSeparator className="bg-zinc-700" />
             <DropdownMenuItem
               onClick={() => onSelect(null)}
-              className="hover:bg-slate-800 text-slate-500 hover:text-slate-300 cursor-pointer"
+              className="hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300 cursor-pointer"
             >
               Clear filter
             </DropdownMenuItem>
@@ -157,7 +157,7 @@ export function DataTable<TData, TValue>({
         <FilterDropdown label="Remote" options={REMOTE_OPTIONS} selected={selectedRemote} onSelect={handleRemoteFilter} />
         {(selectedDiscipline || selectedType || selectedLevel || selectedRemote) && (
           <button
-            className="border border-slate-600 bg-transparent text-slate-500 hover:bg-slate-800 hover:text-slate-300 text-sm px-4 py-2 rounded-full transition-colors"
+            className="border border-zinc-600 bg-transparent text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 text-sm px-4 py-2 rounded-full transition-colors"
             onClick={handleClearFilters}
           >
             Clear all ✕
@@ -166,13 +166,13 @@ export function DataTable<TData, TValue>({
       </div>
 
       {/* table */}
-      <div className="rounded-2xl border border-slate-800 overflow-hidden">
+      <div className="rounded-2xl border border-zinc-800 overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-slate-800 bg-slate-950 hover:bg-slate-950">
+              <TableRow key={headerGroup.id} className="border-zinc-800 bg-zinc-950 hover:bg-zinc-950">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="text-slate-400 font-medium">
+                  <TableHead key={header.id} className="text-zinc-400 font-medium">
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -186,11 +186,11 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className="border-slate-800 hover:bg-slate-800/50 transition-colors"
+                  className="border-zinc-800 hover:bg-zinc-800/50 transition-colors"
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-slate-300">
+                    <TableCell key={cell.id} className="text-zinc-300">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -198,8 +198,8 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center text-slate-500">
-                  No results.
+                <TableCell colSpan={columns.length} className="h-24 text-center text-zinc-500">
+                  No matching opportunities found.
                 </TableCell>
               </TableRow>
             )}
