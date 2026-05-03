@@ -22,4 +22,5 @@ export type UserAnswer = {
   question: string;
   answer: string;
   career: CareerType;
+  intent: string;
 };
