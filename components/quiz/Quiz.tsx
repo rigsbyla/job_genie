@@ -119,6 +119,9 @@ const Quiz = ({ onCancel }: Props) => {
 
   /* Final result screen */
   if (result) {
+    // Construct a dynamic link to connect to the job board
+    const jobBoardUrl = `/job_board?discipline=${result.toLowerCase()}`;
+
     return (
       <ResultCard
         result={result}
@@ -126,6 +129,7 @@ const Quiz = ({ onCancel }: Props) => {
         strengths={strengths}
         nextSteps={nextSteps}
         onExit={onCancel}
+        jobBoardUrl={jobBoardUrl}
         onRestart={() => {
           setIndex(0);
           setAnswers([]);
