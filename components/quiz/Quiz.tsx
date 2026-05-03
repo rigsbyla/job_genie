@@ -146,7 +146,10 @@ const Quiz = ({ onCancel }: Props) => {
       <AnswerList options={currentQuestion.options} onSelect={handleNext} />
 
       <div className="flex justify-between pt-4">
-        <button onClick={onCancel} className="text-sm text-gray-500">
+        <button
+          onClick={onCancel}
+          className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all active:scale-95"
+        >
           Cancel
         </button>
       </div>

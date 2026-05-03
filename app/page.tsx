@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -26,7 +25,7 @@ export default function LandingPage() {
           <a href="#features" className="hover:text-white transition-colors">
             Features
           </a>
-          <a href="LAUREN" className="hover:text-white transition-colors">
+          <a href="/job_board" className="hover:text-white transition-colors">
             Job Board
           </a>
           <Link
@@ -67,7 +66,7 @@ export default function LandingPage() {
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
-            href="LAUREN"
+            href="/job_board"
             className="flex items-center justify-center gap-2 bg-slate-800 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-700 transition-all border border-slate-700"
           >
             <Search className="w-5 h-5" />
@@ -128,7 +127,7 @@ export default function LandingPage() {
             </p>
           </div>
           <a
-            href="LAUREN"
+            href="/job_board"
             className="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1"
           >
             View all <ArrowRight className="w-4 h-4" />
